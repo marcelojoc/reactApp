@@ -26,7 +26,6 @@ function App() {
        
         {todos.map((todo) => (
           // iterar  en el array añadir yn atributo key 
-          
           <TodoItem  key ={todo.id} completed={todo.completed} text={todo.text} />
         ))}
       </TodoList>

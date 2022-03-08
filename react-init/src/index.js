@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+//import './index.css';
 import App from './App';
-import Link from './components/link'
+//import Link from './components/link'
 
 
 ReactDOM.render(
-  <div>
-    <App />
-    <Link enlace='este es el texto desde el componente'> probando childrens props </Link>
-  </div>,
+  
+
+    <App />,
+    
+    
+
   document.getElementById('root')
 );
 

@@ -1,8 +1,8 @@
 import React , {useState} from 'react';
 import './../css/TodoSearch.css'
-function TodoSearch() {
+function TodoSearch({searchValue, setSearchValue}) {
 
-  const [searchValue, setSearchValue] = useState(''); // llamo al UseState  de react
+  //const [searchValue, setSearchValue] = useState(''); // llamo al UseState  de react
 
   const onSearchValueChanges = (event) =>{
 

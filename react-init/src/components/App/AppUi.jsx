@@ -8,13 +8,13 @@ import { CreateTodoButton } from "../CreateTodoButton/index";
 
 
 function AppUi ({
-  totalTodos,
-  completedTodos,
-  searchValue,
-  setSearchValue,
-  temporalTodos,
-  completeTodos,
-  deleteTodo,
+    totalTodos,
+    completedTodos,
+    searchValue,
+    setSearchValue,
+    temporalTodos,
+    completeTodos,
+    deleteTodo,
 }){
 
 return(

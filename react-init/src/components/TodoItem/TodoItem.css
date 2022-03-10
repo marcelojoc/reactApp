@@ -1,11 +1,11 @@
 .TodoItem {
-  background-color: #FAFAFA;
+  background-color: #3DB2FF;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 24px;
-  box-shadow: 0px 5px 50px rgba(32, 35, 41, 0.15);
+  margin-top: 22px;
+  box-shadow: 0px 10px 6px -6px rgba(32, 35, 41,0.76);
 }
 
 .TodoItem-p {
@@ -36,7 +36,7 @@
   left: 12px;
 }
 .Icon-check--active {
-  color: #4caf50;
+  color: #ffffff;
 }
 
 .Icon-delete {
@@ -44,7 +44,7 @@
   top: -20px;
   right: 0;
   border-radius: 50%;
-  background-color: salmon;
+  background-color: #FF2442;
 }
 .Icon-delete:hover {
   color: rgb(158, 30, 8);

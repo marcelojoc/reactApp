@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { AppUi } from "./AppUi";
 
-const todosDefault = [
-  { id: 1, text: "almorzar", completed: false },
-  { id: 2, text: "ver tele", completed: false },
-  { id: 3, text: "salir a comprar", completed: false },
-  { id: 4, text: "terminar ejemplo", completed: true },
-  { id: 5, text: "cenar", completed: false },
-];
+/**
+ * verifico si hay items guardados
+ * si estan los transfiero a un array en el estado todoState
+ */
+// const todosDefault = [
+//   { id: 1, text: "almorzar", completed: false },
+//   { id: 2, text: "ver tele", completed: false },
+//   { id: 3, text: "salir a comprar", completed: false },
+//   { id: 4, text: "terminar ejemplo", completed: true },
+//   { id: 5, text: "cenar", completed: false },
+// ];
 
 function App() {
-  const [todosState, setTodos] = useState(todosDefault); // creo estado para los todos
+
+  const localTodos = localStorage.getItem('TODOS_V1');
+  let parsedTodos= [];
+  if(!localTodos){
+    localStorage.setItem('TODOS_V1', JSON.stringify([]));
+    parsedTodos = [];
+  }else{
+    parsedTodos= JSON.parse(localTodos);
+  }
+
+  const [todosState, setTodos] = useState(parsedTodos); // creo estado para los todos
   const [searchValue, setSearchValue] = useState(""); // creo el estado
   const completedTodos = todosState.filter((item) => {
     return item.completed === true;
@@ -29,6 +43,12 @@ function App() {
       return todoText.includes(searchText); // me fijo si existe la cadena en cada  item
     });
   }
+  const saveTodosLocal = (newTodos)=>{
+    let stringTodos = JSON.stringify(newTodos);
+    localStorage.setItem('TODOS_V1', stringTodos);
+    setTodos(newTodos);
+  }
+
 
   const completeTodos = (text) => {
     // la funcion recibe el indice, en este caso es un texto
@@ -38,7 +58,8 @@ function App() {
 
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed; // le pongo un completed true  a la copia del estado
     // ahora  modifico el Estado
-    setTodos(newTodos);
+    saveTodosLocal(newTodos);
+    
   };
 
   const deleteTodo = (text) => {
@@ -46,7 +67,7 @@ function App() {
     const todoIndex = todosState.findIndex((todo) => todo.text === text);
     const newTodos = [...todosState];
     newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
+    saveTodosLocal(newTodos);
   };
 
   return (

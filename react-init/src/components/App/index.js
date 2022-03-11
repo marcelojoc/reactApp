@@ -18,7 +18,12 @@ import {useLocaltodos} from "../../hooks/useLocaltodos"
 function App() {
 
  
-  const [todosState, saveTodosLocal] = useLocaltodos('TODOS_V1', []); // aqui llamo al hook
+  const {
+    item: todosState,
+    saveItem: saveTodosLocal,
+    loading,
+    error,
+  } = useLocaltodos('TODOS_V1', []); // aqui llamo al hook
 
   const [searchValue, setSearchValue] = useState(""); // creo el estado
   const completedTodos = todosState.filter((item) => {
@@ -59,8 +64,11 @@ function App() {
     saveTodosLocal(newTodos);
   };
 
+
   return (
     <AppUi
+      loading={loading}
+      error={error}
       totalTodos={totalTodos}
       completedTodos={completedTodos}
       searchValue={searchValue}

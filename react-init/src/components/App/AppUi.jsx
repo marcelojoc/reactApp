@@ -8,6 +8,8 @@ import { CreateTodoButton } from "../CreateTodoButton/index";
 
 
 function AppUi ({
+    loading,
+    error,
     totalTodos,
     completedTodos,
     searchValue,
@@ -31,7 +33,10 @@ return(
     />
 
     <TodoList>
-     
+      {error && <p>Desespérate, hubo un error...</p>}
+      {loading && <p>Estamos cargando, no desesperes...</p>}
+      {(!loading && !temporalTodos.length) && <p>¡Crea tu primer TODO!</p>}
+      
       {temporalTodos.map((todo) => (
         // iterar  en el array añadir yn atributo key 
         <TodoItem  key ={todo.text} 

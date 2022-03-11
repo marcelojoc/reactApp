@@ -13,27 +13,48 @@ import { AppUi } from "./AppUi";
 //   { id: 5, text: "cenar", completed: false },
 // ];
 
+// hook personalizado
+function useLocaltodos(itemLocal, initialValue){
+
+  const localTodos = localStorage.getItem(itemLocal);
+  let parsedTodos = [];
+  
+  if (!localTodos) {
+    localStorage.setItem(itemLocal, JSON.stringify(initialValue));
+    parsedTodos = initialValue;
+  } else {
+    parsedTodos = JSON.parse(localTodos);
+  }
+  
+  const [todosState, setTodos] = useState(parsedTodos); // creo estado para los todos
+  const saveTodosLocal = (newTodos) => {
+    let stringTodos = JSON.stringify(newTodos);
+    localStorage.setItem(itemLocal , stringTodos);
+    setTodos(newTodos);
+  };
+    // para que funcione el HOOK hay que retornar los metodos y el State
+  return [
+    todosState,
+    saveTodosLocal,
+  ];
+
+}
+
 function App() {
 
-  const localTodos = localStorage.getItem('TODOS_V1');
-  let parsedTodos= [];
-  if(!localTodos){
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedTodos = [];
-  }else{
-    parsedTodos= JSON.parse(localTodos);
-  }
+ 
+  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []); // aqui llamo al hook
 
-  const [todosState, setTodos] = useState(parsedTodos); // creo estado para los todos
   const [searchValue, setSearchValue] = useState(""); // creo el estado
   const completedTodos = todosState.filter((item) => {
     return item.completed === true;
   }).length;
   const totalTodos = todosState.length; // total de todos
 
-  let temporalTodos = [];  // guardo temporalemtne  para la busqueda
+  let temporalTodos = []; // guardo temporalemtne  para la busqueda
 
-  if (!searchValue.length >= 1) { // verifico busqueda en todomomento por searchValue
+  if (!searchValue.length >= 1) {
+    // verifico busqueda en todomomento por searchValue
     temporalTodos = todosState;
   } else {
     temporalTodos = todosState.filter((todo) => {
@@ -43,12 +64,6 @@ function App() {
       return todoText.includes(searchText); // me fijo si existe la cadena en cada  item
     });
   }
-  const saveTodosLocal = (newTodos)=>{
-    let stringTodos = JSON.stringify(newTodos);
-    localStorage.setItem('TODOS_V1', stringTodos);
-    setTodos(newTodos);
-  }
-
 
   const completeTodos = (text) => {
     // la funcion recibe el indice, en este caso es un texto
@@ -59,7 +74,6 @@ function App() {
     newTodos[todoIndex].completed = !newTodos[todoIndex].completed; // le pongo un completed true  a la copia del estado
     // ahora  modifico el Estado
     saveTodosLocal(newTodos);
-    
   };
 
   const deleteTodo = (text) => {

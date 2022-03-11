@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AppUi } from "./AppUi";
-
+import {useLocaltodos} from "../../hooks/useLocaltodos"
 /**
  * verifico si hay items guardados
  * si estan los transfiero a un array en el estado todoState
@@ -13,37 +13,12 @@ import { AppUi } from "./AppUi";
 //   { id: 5, text: "cenar", completed: false },
 // ];
 
-// hook personalizado
-function useLocaltodos(itemLocal, initialValue){
 
-  const localTodos = localStorage.getItem(itemLocal);
-  let parsedTodos = [];
-  
-  if (!localTodos) {
-    localStorage.setItem(itemLocal, JSON.stringify(initialValue));
-    parsedTodos = initialValue;
-  } else {
-    parsedTodos = JSON.parse(localTodos);
-  }
-  
-  const [todosState, setTodos] = useState(parsedTodos); // creo estado para los todos
-  const saveTodosLocal = (newTodos) => {
-    let stringTodos = JSON.stringify(newTodos);
-    localStorage.setItem(itemLocal , stringTodos);
-    setTodos(newTodos);
-  };
-    // para que funcione el HOOK hay que retornar los metodos y el State
-  return [
-    todosState,
-    saveTodosLocal,
-  ];
-
-}
 
 function App() {
 
  
-  const [todos, saveTodos] = useLocalStorage('TODOS_V1', []); // aqui llamo al hook
+  const [todosState, saveTodosLocal] = useLocaltodos('TODOS_V1', []); // aqui llamo al hook
 
   const [searchValue, setSearchValue] = useState(""); // creo el estado
   const completedTodos = todosState.filter((item) => {

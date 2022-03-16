@@ -1,8 +1,10 @@
 import React from "react";
 import "./TodoSearch.css";
-function TodoSearch({ searchValue, setSearchValue }) {
+import {TodoContext} from "../../todoContext"
+function TodoSearch() {
   //const [searchValue, setSearchValue] = useState(''); // llamo al UseState  de react
 
+  const{searchValue, setSearchValue} = React.useContext(TodoContext);
   const onSearchValueChanges = (event) => {
     console.log(event.target.value);
     setSearchValue(event.target.value); // modifico el State  con los valores
@@ -16,7 +18,8 @@ function TodoSearch({ searchValue, setSearchValue }) {
         value={searchValue}
         onChange={onSearchValueChanges}
       ></input>
-      <p>{searchValue}</p>
+      <p>{searchValue}
+      +</p>
     </div>
   );
 }

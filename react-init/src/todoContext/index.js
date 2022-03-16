@@ -16,6 +16,7 @@ function Todoprovider(props){ // creo una funcion que englobe todo el context Pr
       } = useLocaltodos('TODOS_V1', []); // aqui llamo al hook personalizado
     
       const [searchValue, setSearchValue] = useState(""); // creo el estado de lo que colocas  en el formulario
+      const [openModal, setOpenModal] = useState(false);// estado para  visualizar  el foirmulario de creacion de todos
       const completedTodos = todosState.filter((item) => {
         return item.completed === true;
       }).length;
@@ -59,6 +60,8 @@ function Todoprovider(props){ // creo una funcion que englobe todo el context Pr
         /* la propiedad value  me dice que valores vamos a compartir */
         return (
             <TodoContext.Provider value ={{
+                openModal,
+                setOpenModal,
                 loading,
                 error,
                 totalTodos,

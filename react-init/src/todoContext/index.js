@@ -7,10 +7,9 @@ import { useLocaltodos } from '../hooks/useLocaltodos';
 const TodoContext = React.createContext();
 
 function Todoprovider(props){ // creo una funcion que englobe todo el context Provider
-
     const {
         item: todosState,
-        saveItem: saveTodosLocal,
+        saveTodosLocal,
         loading,
         error,
       } = useLocaltodos('TODOS_V1', []); // aqui llamo al hook personalizado
@@ -36,6 +35,18 @@ function Todoprovider(props){ // creo una funcion que englobe todo el context Pr
         });
       }
     
+      const saveTodos = (text) => { // esta funcion guarda los todos en el array 
+
+        console.log(text);
+        const newTodos = [...todosState];
+        newTodos.push({
+          completed: false,
+          text,
+        });
+        saveTodosLocal(newTodos);
+
+      };
+
       const completeTodos = (text) => {
         // la funcion recibe el indice, en este caso es un texto
         const todoIndex = todosState.findIndex((todo) => todo.text === text); // aqui tengo el indice
@@ -60,6 +71,7 @@ function Todoprovider(props){ // creo una funcion que englobe todo el context Pr
         /* la propiedad value  me dice que valores vamos a compartir */
         return (
             <TodoContext.Provider value ={{
+                saveTodos,
                 openModal,
                 setOpenModal,
                 loading,

@@ -5,6 +5,7 @@ import { TodoCounter } from "../TodoCounter/index";
 import { TodoSearch } from "../TodoSearch/index";
 import { TodoList } from "../TodoList/index";
 import { TodoItem } from "../TodoItem/index";
+import { TodoForm } from "../TodoForm";
 import { CreateTodoButton } from "../CreateTodoButton/index";
 import { Modal } from "../Modal";
 
@@ -42,6 +43,8 @@ function AppUi() {
           { openModal && (
 
             <Modal>
+
+              <TodoForm/>
 
             </Modal>
           )}

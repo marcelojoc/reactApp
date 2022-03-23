@@ -6,6 +6,10 @@ import { TodoSearch } from "../TodoSearch/index";
 import { TodoList } from "../TodoList/index";
 import { TodoItem } from "../TodoItem/index";
 import { TodoForm } from "../TodoForm";
+import {EmptyTodos} from "../EmptyTodos"; // Skeletons
+import {TodosError} from "../TodosError";
+import {TodosLoading} from "../TodosLoading";
+import {Article} from "../TodosLoading/ArticleLoader";
 import { CreateTodoButton } from "../CreateTodoButton/index";
 import { Modal } from "../Modal";
 
@@ -25,7 +29,8 @@ function AppUi() {
 
       <TodoList>
         {error && <p>Desespérate, hubo un error...</p>}
-        {loading && <p>Estamos cargando, no desesperes...</p>}
+        {loading && <TodosLoading/>}
+        {loading && <Article/>}
         {!loading && !temporalTodos.length && <p>¡Crea tu primer TODO!</p>}
 
         {temporalTodos.map((todo) => (

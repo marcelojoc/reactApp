@@ -1,6 +1,7 @@
 import React from "react";
 import "./TodoItem.css";
-
+import {CompleteIcon} from '../TodoIcon/CompleteIcon'
+ 
 function TodoItem(props) {
   // const onComplete = () =>{
   //     alert('completaste  el item '+ props.text);
@@ -17,6 +18,7 @@ function TodoItem(props) {
       >
         √
       </span>
+      <CompleteIcon completed={props.completed} onCompleted={props.onComplete} />
       <p className={`TodoItem-p ${props.completed && "TodoItem-p--complete"}`}>
         {props.text}
       </p>

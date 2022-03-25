@@ -1,0 +1,33 @@
+.Icon-container{
+
+
+}
+
+.Icon-svg{
+    width: 24px;
+    height: 24px;
+    transition: fill .15s;
+}
+.Icon-container--check{
+
+    width: 48px;
+    height:  48px;
+
+}
+
+.Icon-container--delete{
+
+    
+}
+
+.Icon-container--heart{
+
+    
+}
+
+.Icon-container:hover .Icon-container--check{
+
+    fill: crimson;
+
+}
+
